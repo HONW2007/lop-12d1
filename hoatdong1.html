@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ lưu niệm</title>
+    <style>
+        
+        .cover {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); 
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            perspective: 1200px;
+        }
+
+        .book {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform-origin: left;
+            transition: transform 1.2s ease-in-out;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .page .front, .page .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+        }
+
+        .front img, .back img {
+            width: 90%;
+            height: 90%;
+            border-radius: 5px;
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page:nth-child(1) { z-index: 10; }
+        .page:nth-child(2) { z-index: 9; }
+        .page:nth-child(3) { z-index: 8; }
+        .page:nth-child(4) { z-index: 7; }
+        .page:nth-child(5) { z-index: 6; }
+        .page:nth-child(6) { z-index: 5; }
+        .page:nth-child(7) { z-index: 4; }
+        .page:nth-child(8) { z-index: 3; }
+        .page:nth-child(9) { z-index: 2; }
+        .page:nth-child(10) { z-index: 1; }
+
+        .cover {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="book">
+        <div class="page">
+            <div class="front cover">📖 Lưu niệm 12D1</div>
+            <div class="back"><img src="C:\Users\Admin\Pictures\Roblox\camhoa.jpg" alt="Page 1"></div>
+        </div>
+        <div class="page">
+            <div class="front"><img src="C:\Users\Admin\Pictures\Roblox\anhlop.jpg" alt="Page 2"></div>
+            <div class="back"><img src="C:\Users\Admin\Pictures\Roblox\hdcamhoa.jpg" alt="Page 3"></div>
+        </div>
+        <div class="page">
+            <div class="front"><img src="C:\Users\Admin\Pictures\Roblox\kiniem.jpg" alt="Page 4"></div>
+            <div class="back"><img src="C:\Users\Admin\Pictures\Roblox\lmmut.jpg" alt="Page 5"></div>
+        </div>
+        <div class="page">
+            <div class="front"><img src="C:\Users\Admin\Pictures\Roblox\sotaycohuyen.jpg" alt="Page 6"></div>
+            <div class="back"><img src="C:\Users\Admin\Pictures\Roblox\sotaythaydat.jpg" alt="Page 7"></div>
+        </div>
+        <div class="page">
+            <div class="front"><img src="C:\Users\Admin\Pictures\Roblox\vetranh.jpg" alt="Page 8"></div>
+            <div class="back cover">📖 Hết Sách</div>
+        </div>
+    </div>
+
+    <script>
+        let pages = document.querySelectorAll('.page');
+        let maxPages = pages.length;
+        let currentPage = 0;
+
+        document.body.addEventListener('click', (event) => {
+            let bookRect = document.querySelector('.book').getBoundingClientRect();
+            let clickX = event.clientX;
+            let middleX = bookRect.left + bookRect.width / 2;
+            
+            if (clickX > middleX && currentPage < maxPages - 1) {
+                pages[currentPage].classList.add('flipped');
+                currentPage++;
+            } else if (clickX < middleX && currentPage > 0) {
+                currentPage--;
+                pages[currentPage].classList.remove('flipped');
+            }
+        });
+    </script>
+</body>
+</html>
+
