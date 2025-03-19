@@ -6,21 +6,22 @@
     <title>Sổ lưu niệm</title>
     <style>
         .cover {
-    background: linear-gradient(to right, #ff7e5f, #feb47b); 
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-}
+            background: linear-gradient(to right, #ff7e5f, #feb47b); 
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+        }
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -98,31 +99,54 @@
             height: 100%;
             width: 100%;
         }
+
+        .home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: #ff4757;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .home-button:hover {
+            background: #e84118;
+        }
     </style>
 </head>
 <body>
     <div class="book">
         <div class="page">
             <div class="front cover">📖 Lưu niệm 12D1</div>
-            <div class="back"><img src="images\camhoa.jpg" alt="Page 1"></div>
+            <div class="back"><img src="images/camhoa.jpg" alt="Page 1"></div>
         </div>
-       
+        
         <div class="page">
-            <div class="front"><img src="images\anhlop.jpg" alt="Page 2"></div>
-            <div class="back"><img src="images\hdcamhoa.jpg" alt="Page 3"></div>
-        </div>
-        <div class="page">
-            <div class="front"><img src="images\kiniem.jpg" alt="Page 4"></div>
-            <div class="back"><img src="images\lmmut.jpg" alt="Page 5"></div>
+            <div class="front"><img src="images/anhlop.jpg" alt="Page 2"></div>
+            <div class="back"><img src="images/hdcamhoa.jpg" alt="Page 3"></div>
         </div>
         <div class="page">
-            <div class="front"><img src="images\sotaycohuyen.jpg" alt="Page 6"></div>
-            <div class="back"><img src="images\sotaythaydat.jpg" alt="Page 7"></div>
+            <div class="front"><img src="images/kiniem.jpg" alt="Page 4"></div>
+            <div class="back"><img src="images/lmmut.jpg" alt="Page 5"></div>
         </div>
         <div class="page">
-            <div class="front"><img src="images\vetranh.jpg" alt="Page8"></div>
-
-
+            <div class="front"><img src="images/sotaycohuyen.jpg" alt="Page 6"></div>
+            <div class="back"><img src="images/sotaythaydat.jpg" alt="Page 7"></div>
+        </div>
+        <div class="page">
+            <div class="front"><img src="images/vetranh.jpg" alt="Page 8"></div>
+        </div>
+    </div>
+    <button class="home-button" onclick="goHome()">Quay về trang chủ</button>
+    <script>
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
     <script>
         let pages = document.querySelectorAll('.page');
         let maxPages = pages.length;
@@ -141,7 +165,6 @@
                 pages[currentPage].classList.remove('flipped');
             }
         });
-</script>
     </script>
 </body>
 </html>

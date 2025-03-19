@@ -3,22 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12D1</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Giới Thiệu Bản Thân</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .profile {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            max-width: 500px;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #3498db;
+        }
+        h1 {
+            color: #333;
+        }
+        .typing {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #333;
+            animation: typing 3s steps(30, end) forwards, blink 0.75s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        .contact a {
+            text-decoration: none;
+            color: #3498db;
+            font-size: 28px;
+            margin: 12px;
+            transition: transform 0.3s;
+        }
+        .contact a:hover {
+            transform: scale(1.2);
+            color: #e74c3c;
+        }
+    </style>
 </head>
+<a href="thanhvien.html" class="back-button">⬅ Quay lại danh sách</a>
 <body>
-    <header>
-        <h1>Giới Thiệu Thành Viên</h1>
-    </header>
-
-    <section class="member-profile">
-        <img src="avatar1.jpg" alt="Trần Thị Kim Lộc">
-        <h2>Trần Thị Kim Lộc</h2>
-        <p>🔥 <strong>Câu nói:</strong> ???</p>
-        <p>💡 <strong>Sở thích:</strong> ???</p>
-        <p>🎯 <strong>Ước mơ:</strong> ???</p>
-    </section>
-
-    <a href="thanhvien.html" class="back-button">⬅ Quay lại danh sách</a>
+    <div class="profile">
+        <img src="anhlq12D1\localice.jpeg" alt="Avatar">
+        <h1 class="typing">Trần Thị Kim Lộc</h1>
+        <p><strong>Ngày sinh:</strong> 01/01/2007</p>
+        <p><strong>Sở thích:</strong>xem phim, ăn uống,...</p>
+        <div class="contact">
+            <a href="mailto:youremail@example.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
 </body>
 </html>
