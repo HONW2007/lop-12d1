@@ -5,38 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lớp 12D1 - Kỷ Niệm</title>
     <link rel="stylesheet" href="TTin.css" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
+        }
+
+        h1, h2, p {
+            color: #ffeb3b;
+            text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+        }
+
+        section {
+            margin: 20px auto;
+            padding: 30px;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+            transition: 0.5s;
+        }
+
+        section:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.8);
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #ff6a00, #ee0979);
+            color: white;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px #ee0979;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px #ff6a00; }
+            100% { box-shadow: 0 0 20px #ee0979; }
+        }
+
+        .floating-bubble {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-50px); opacity: 0.7; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Chào mừng đến với trang kỷ niệm của lớp 12D1!</h1>
         <p>Hãy cùng nhau lưu giữ những khoảnh khắc đẹp của lớp 12D1!</p>
     </header>
-   
-</header>
 
+    <section id="home">
+        <h2>Trang chủ</h2>
+        <p>Lớp 12D1 Niên Khóa 2022-2025.</p>
+        <a href="index.html" class="btn">Trang Chủ</a>
+    </section>
 
-<section id="home">
-    <h2>Trang chủ</h2>
-    <p>Lớp 12D1 Niên Khóa 2022-2025.</p>
-    <a href="index.html" class="btn">Trang Chủ</a>
-<section id="activities">
-    <h2>Hoạt Động</h2>
-    <p>Đây là phần kỷ niệm và các hoạt động của lớp 12D1.</p>
-    <a href="hoatdong1.html" class="btn">Hoạt Động</a>
+    <section id="activities">
+        <h2>Hoạt Động</h2>
+        <p>Đây là phần kỷ niệm và các hoạt động của lớp 12D1.</p>
+        <a href="hoatdong1.html" class="btn">Hoạt Động</a>
+    </section>
 
-
-<section id="members">
-    <h2>Giới thiệu các thành viên lớp 12D1</h2>
-    <div id="members-list">
+    <section id="members">
+        <h2>Giới thiệu các thành viên lớp 12D1</h2>
         <a href="thanhvien.html" class="btn">Thành Viên</a>
-   
-    </div>
-</section>
-
+    </section>
 
     <footer>
         <p>&copy; 2025 Lớp 12D1. Tất cả quyền được bảo lưu.</p>
     </footer>
-<script scr="hoatdong.js"></script>
+
+    <script>
+        function createBubble() {
+            const bubble = document.createElement("div");
+            bubble.classList.add("floating-bubble");
+            document.body.appendChild(bubble);
+            bubble.style.left = `${Math.random() * window.innerWidth}px`;
+            bubble.style.top = `${Math.random() * window.innerHeight}px`;
+            setTimeout(() => bubble.remove(), 6000);
+        }
+        setInterval(createBubble, 500);
+    </script>
 </body>
 </html>
+

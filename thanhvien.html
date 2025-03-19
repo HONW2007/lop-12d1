@@ -6,10 +6,141 @@
     <title>Thành viên 1 - Lớp 12D1</title>
     <link rel="stylesheet" href="hoatdong.css">
     <link rel="stylesheet" href="bang.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffdde1);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            animation: waveBackground 10s infinite alternate;
+            overflow-x: hidden;
+        }
+        @keyframes waveBackground {
+            from { background-position: 0% 0%; }
+            to { background-position: 100% 100%; }
+        }
+        .container {
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 10px;
+            padding: 10px;
+            width: 80%;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            border: 2px solid rgba(255, 105, 180, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            overflow-x: hidden;
+        }
+        .sparkle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255,255,255,0.5) 10%, rgba(255,255,255,0) 70%);
+            animation: sparkleEffect 1s infinite alternate;
+        }
+        @keyframes sparkleEffect {
+            from { opacity: 0.3; }
+            to { opacity: 0.7; }
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th {
+            background: linear-gradient(135deg, #ff6b6b, #f94d6a);
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: fireText 1.5s infinite alternate;
+            padding: 12px;
+        }
+        @keyframes fireText {
+            from { text-shadow: 0 0 10px #ff4500, 0 0 20px #ff6347; }
+            to { text-shadow: 0 0 20px #ff4500, 0 0 40px #ff6347; }
+        }
+        tr {
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        tr:hover {
+            background-color: rgba(255, 165, 0, 0.5);
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+            animation: pulseGlow 1s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 20px rgba(255, 165, 0, 0.7); }
+            to { box-shadow: 0 0 30px rgba(255, 69, 0, 0.9); }
+        }
+        tr:active {
+            animation: shimmer 0.5s ease-out;
+        }
+        @keyframes shimmer {
+            0% { background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.6), rgba(255,255,255,0.1)); }
+            100% { background: transparent; }
+        }
+        tr:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: width 0.5s, height 0.5s, opacity 0.5s;
+        }
+        tr:active:before {
+            width: 200px;
+            height: 200px;
+            opacity: 1;
+        }
+        td a:hover {
+            color: #e74c3c;
+            text-decoration: underline;
+            animation: blink 0.5s infinite alternate;
+        }
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.6; }
+        }
+        .home-button {
+            display: block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+            animation: buttonPulse 1.5s infinite;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="table-container"> 
+        <div class="table-container">
+            <div class="sparkle"></div>
             <table id="memberTable">
                 <tr>
                     <th>STT</th>
@@ -26,7 +157,7 @@
                     <td>Đặng Quang Bình</td>
                     <td><a href="quangbinh.html">Quang Bình</a></td>
                 </tr>
-                <tr>
+				 <tr>
                     <td>3</td>
                     <td>Đặng Thị Như Bình</td>
                     <td><a href="nhubinh.html">Như Bình</a></td>
@@ -229,18 +360,12 @@
             </table>
         </div>
            
-            
-</html>
-
-
-           
+            </table>
+        </div>
         <a href="index.html" class="home-button">🏠 Quay về trang chủ</a>
-
         <footer>
             <p>&copy; 2025 Lớp 12D1. Tất cả quyền được bảo lưu.</p>
         </footer>
     </div>
-
-    <script src="TTin.js"></script>
 </body>
 </html>

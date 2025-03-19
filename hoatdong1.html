@@ -5,6 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sổ lưu niệm</title>
     <style>
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+
+        /* Hiệu ứng Gradient Di Chuyển */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Hiệu ứng lật trang mượt mà */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: left;
+    transition: transform 0.8s ease-in-out, opacity 0.5s ease; /* Giảm thời gian và dùng easing cho lật mượt mà */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hiệu ứng khi lật trang */
+.page.flipped {
+    transform: rotateY(-180deg) rotateX(5deg); /* Chỉnh sửa góc lật nhẹ nhàng hơn */
+    transition: transform 0.8s ease-in-out; /* Mượt mà hơn khi lật */
+}
+
+/* Hiệu ứng mượt mà khi cuộn trang */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hiệu ứng viền sáng khi hover */
+.page:hover {
+    border: 3px solid #ff4757;
+    transition: border 0.3s ease;
+}
+
+/* Hiệu ứng khi hover trên nút */
+.home-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: #ff4757;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+    background: #e84118;
+    transform: scale(1.05);
+}
+
+.home-button:active {
+    transform: scale(1.02);
+}
+
+
         .cover {
             background: linear-gradient(to right, #ff7e5f, #feb47b); 
             color: white;
@@ -17,8 +83,14 @@
             height: 100%;
             width: 100%;
             border-radius: 10px;
+            border: 5px solid;
+            border-image-source: linear-gradient(90deg, #ffd700, #fff, #ffd700);
+            border-image-slice: 1;
+            animation: shimmer 2s infinite linear;
+            background-size: 400px;
         }
 
+        /* Hiệu ứng parallax */
         body {
             display: flex;
             flex-direction: column;
@@ -27,7 +99,7 @@
             height: 100vh;
             background-color: #f5f5f5;
             margin: 0;
-            perspective: 1200px;
+            perspective: 2000px;
         }
 
         .book {
@@ -38,6 +110,13 @@
             border-radius: 15px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
             background: linear-gradient(to right, #6a11cb, #2575fc);
+            transition: transform 0.5s ease-in-out;
+            background-size: 200% 200%;
+            animation: gradientMove 5s ease infinite;
+        }
+
+        .book:hover {
+            transform: rotate(5deg) scale(1.02);
         }
 
         .page {
@@ -46,17 +125,16 @@
             height: 100%;
             transform-style: preserve-3d;
             transform-origin: left;
-            transition: transform 1.2s ease-in-out;
+            transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease;
             background: white;
             border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .page .front, .page .back {
             position: absolute;
             width: 100%;
             height: 100%;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -74,7 +152,7 @@
         }
 
         .flipped {
-            transform: rotateY(-180deg);
+            transform: rotateY(-180deg) rotateX(10deg);
         }
 
         .page:nth-child(1) { z-index: 10; }
@@ -88,18 +166,27 @@
         .page:nth-child(9) { z-index: 2; }
         .page:nth-child(10) { z-index: 1; }
 
-        .cover {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
+        /* Hiệu ứng mượt mà khi cuộn trang */
+        html {
+            scroll-behavior: smooth;
         }
 
+        /* Hiệu ứng viền sáng khi hover */
+        .page:hover {
+            border: 3px solid #ff4757;
+            transition: border 0.3s ease;
+        }
+
+        /* Hiệu ứng lật trang từ từ */
+        .page.flipped {
+            transition: transform 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .page {
+            transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Nút Quay lại trang chủ */
         .home-button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -111,11 +198,18 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .home-button:hover {
             background: #e84118;
+            transform: scale(1.1);
         }
+
+        .home-button:active {
+            transform: scale(1.05);
+        }
+
     </style>
 </head>
 <body>
@@ -141,13 +235,15 @@
             <div class="front"><img src="images/vetranh.jpg" alt="Page 8"></div>
         </div>
     </div>
+    
+    <!-- Nút Quay về trang chủ -->
     <button class="home-button" onclick="goHome()">Quay về trang chủ</button>
+    
     <script>
         function goHome() {
-            window.location.href = 'index.html';
+            window.location.href = 'index.html';  // Điều hướng về trang chủ
         }
-    </script>
-    <script>
+
         let pages = document.querySelectorAll('.page');
         let maxPages = pages.length;
         let currentPage = 0;
