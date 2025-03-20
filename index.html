@@ -13,14 +13,14 @@
             font-family: 'Orbitron', sans-serif;
             color: #fff;
             text-align: center;
-            min-height: 100vh; /* Đảm bảo chiều cao tối thiểu bằng khung hình */
-            overflow-y: auto; /* Cho phép cuộn dọc khi nội dung dài */
+            min-height: 100vh; 
+            overflow-y: auto; 
             position: relative;
             perspective: 3000px;
         }
 
         canvas {
-            position: fixed; /* Đặt canvas cố định làm nền */
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
@@ -35,7 +35,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh; /* Đảm bảo container vừa khung hình */
+            min-height: 100vh;
             box-sizing: border-box;
         }
 
@@ -57,7 +57,7 @@
         }
 
         h1 {
-            font-size: clamp(36px, 5vw, 50px); /* Điều chỉnh kích thước chữ linh hoạt */
+            font-size: clamp(36px, 5vw, 50px); 
             color: #ffeb3b;
             text-shadow: 0 0 15px #ffeb3b, 0 0 30px #ff4757, 0 0 60px #00ddeb;
             letter-spacing: 4px;
@@ -169,7 +169,7 @@
         }
 
         footer {
-            position: relative; /* Thay fixed bằng relative để cuộn cùng nội dung */
+            position: relative; 
             width: 100%;
             padding: 20px 0;
             z-index: 10;
@@ -227,6 +227,7 @@
 
         <footer>
             <p>© 2025 Lớp 12D1 - Vũ Trụ Lung Linh. Tất cả quyền được bảo lưu.</p>
+            <p>Cre:TMH12D1</p>
         </footer>
     </div>
 
@@ -235,7 +236,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/RenderPass.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/UnrealBloomPass.js"></script>
     <script>
-        // Background Scene
+      
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ 
@@ -246,7 +247,7 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         camera.position.z = 80;
 
-        // Bloom Effect
+        
         const renderScene = new THREE.RenderPass(scene, camera);
         const bloomPass = new THREE.UnrealBloomPass(
             new THREE.Vector2(window.innerWidth, window.innerHeight),
@@ -259,7 +260,7 @@
         composer.addPass(renderScene);
         composer.addPass(bloomPass);
 
-        // Stars with Glow
+       
         const starGeometry = new THREE.BufferGeometry();
         const starCount = 10000;
         const posArray = new Float32Array(starCount * 3);
@@ -270,9 +271,8 @@
             posArray[i * 3 + 1] = (Math.random() - 0.5) * 450;
             posArray[i * 3 + 2] = (Math.random() - 0.5) * 450;
             velocities[i] = Math.random() * 0.08 + 0.06;
-            colors[i * 3] = Math.random();     // Red
-            colors[i * 3 + 1] = Math.random(); // Green
-            colors[i * 3 + 2] = 1;             // Blue
+            colors[i * 3] = Math.random();     
+            colors[i * 3 + 1] = Math.random(); 
         }
         starGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
@@ -285,7 +285,6 @@
         const stars = new THREE.Points(starGeometry, starMaterial);
         scene.add(stars);
 
-        // Nebula Effect
         const nebulaGeometry = new THREE.SphereGeometry(250, 64, 64);
         const nebulaMaterial = new THREE.MeshBasicMaterial({
             color: 0xff4757,
@@ -297,7 +296,6 @@
         const nebula = new THREE.Mesh(nebulaGeometry, nebulaMaterial);
         scene.add(nebula);
 
-        // Galaxy Ring
         const ringGeometry = new THREE.TorusGeometry(150, 1, 16, 100);
         const ringMaterial = new THREE.MeshBasicMaterial({
             color: 0x00ddeb,
@@ -309,14 +307,14 @@
         galaxyRing.rotation.x = Math.PI / 2;
         scene.add(galaxyRing);
 
-        // Lighting
+      
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
         scene.add(ambientLight);
         const pointLight = new THREE.PointLight(0xff4757, 5, 250);
         pointLight.position.set(0, 0, 70);
         scene.add(pointLight);
 
-        // Floating Sparkles
+       
         function createSparkle() {
             const sparkle = document.createElement("div");
             sparkle.classList.add("floating-sparkle");
@@ -327,13 +325,13 @@
         }
         setInterval(createSparkle, 200);
 
-        // Animation Loop
+       
         const clock = new THREE.Clock();
         function animate() {
             requestAnimationFrame(animate);
             const delta = clock.getDelta();
 
-            // Update Stars
+           
             const starPos = stars.geometry.attributes.position.array;
             for (let i = 0; i < starCount; i++) {
                 starPos[i * 3 + 2] += velocities[i];
@@ -341,7 +339,7 @@
             }
             stars.geometry.attributes.position.needsUpdate = true;
 
-            // Update Nebula and Galaxy Ring
+           
             nebula.rotation.y += 0.006;
             nebula.rotation.x += 0.003;
             galaxyRing.rotation.z += 0.005;
@@ -349,16 +347,12 @@
             composer.render();
         }
         animate();
-
-        // Resize Handling
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
             composer.setSize(window.innerWidth, window.innerHeight);
         });
-
-        // Background Music
         const bgMusic = new Audio('https://www.bensound.com/bensound-music/bensound-the-lounge.mp3');
         bgMusic.loop = true;
         bgMusic.volume = 0.6;
