@@ -3,126 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lớp 12D1 - Kỷ Niệm</title>
-    <link rel="stylesheet" href="TTin.css" />
+    <title>Lớp 12D1 - Kỷ Niệm Lung Linh</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #1a1a3d, #0d0d1a);
+            font-family: 'Orbitron', sans-serif;
             color: #fff;
             text-align: center;
-            overflow-x: hidden;
+            min-height: 100vh; /* Đảm bảo chiều cao tối thiểu bằng khung hình */
+            overflow-y: auto; /* Cho phép cuộn dọc khi nội dung dài */
             position: relative;
+            perspective: 3000px;
         }
 
-        @keyframes gradientBG {
+        canvas {
+            position: fixed; /* Đặt canvas cố định làm nền */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Đảm bảo container vừa khung hình */
+            box-sizing: border-box;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 0 50px rgba(255, 71, 87, 0.9);
+            margin: 20px 0;
+            transform: translateZ(30px);
+            animation: pulseGlow 2s ease-in-out infinite;
+            max-width: 90%;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.7), 0 0 40px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(255, 71, 87, 1), 0 0 80px rgba(255, 255, 255, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.7), 0 0 40px rgba(255, 255, 255, 0.5); }
+        }
+
+        h1 {
+            font-size: clamp(36px, 5vw, 50px); /* Điều chỉnh kích thước chữ linh hoạt */
+            color: #ffeb3b;
+            text-shadow: 0 0 15px #ffeb3b, 0 0 30px #ff4757, 0 0 60px #00ddeb;
+            letter-spacing: 4px;
+            animation: textGlow 1.5s ease-in-out infinite alternate;
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-size: clamp(24px, 4vw, 34px);
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700, 0 0 20px #ff4757;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: clamp(14px, 2.5vw, 18px);
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 71, 87, 0.6);
+            margin: 10px 0;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ff4757; }
+            100% { text-shadow: 0 0 20px #ffeb3b, 0 0 40px #ff4757, 0 0 60px #00ddeb; }
+        }
+
+        section {
+            margin: 30px auto;
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 30px;
+            box-shadow: 0 0 60px rgba(255, 71, 87, 0.8);
+            transition: all 0.6s ease;
+            transform: translateZ(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 71, 87, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        section:hover::before {
+            opacity: 1;
+        }
+
+        section:hover {
+            transform: scale(1.05) translateZ(40px);
+            box-shadow: 0 0 100px rgba(255, 71, 87, 1), 0 0 150px rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .btn {
+            background: linear-gradient(90deg, #ff4757, #00ddeb, #ffd700, #6a11cb);
+            color: white;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: clamp(16px, 2vw, 22px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(255, 71, 87, 0.9);
+            transition: all 0.5s ease;
+            background-size: 400% 400%;
+            animation: gradientMove 4s ease infinite;
+            display: inline-block;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::after {
+            width: 200%;
+            height: 200%;
+        }
+
+        .btn:hover {
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 71, 87, 1), 0 0 80px rgba(0, 221, 235, 0.8);
+            filter: brightness(1.5);
+        }
+
+        @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        header {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
+        footer {
+            position: relative; /* Thay fixed bằng relative để cuộn cùng nội dung */
+            width: 100%;
+            padding: 20px 0;
+            z-index: 10;
         }
 
-        h1, h2, p {
+        footer p {
+            font-size: clamp(12px, 2vw, 16px);
             color: #ffeb3b;
-            text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+            text-shadow: 0 0 15px #ffeb3b, 0 0 25px #ff4757;
         }
 
-        section {
-            margin: 20px auto;
-            padding: 30px;
-            max-width: 800px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
-            transition: 0.5s;
-        }
-
-        section:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.8);
-        }
-
-        .btn {
-            background: linear-gradient(90deg, #ff6a00, #ee0979);
-            color: white;
-            padding: 14px 28px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1em;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 15px #ee0979;
-            animation: glow 1.5s infinite alternate;
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 10px #ff6a00; }
-            100% { box-shadow: 0 0 20px #ee0979; }
-        }
-
-        .floating-bubble {
+        .floating-sparkle {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.6);
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255, 71, 87, 0.9), rgba(255, 255, 255, 0));
             border-radius: 50%;
-            animation: float 6s infinite ease-in-out;
+            animation: sparkle 5s infinite ease-in-out;
+            z-index: 5;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(-50px); opacity: 0.7; }
-            100% { transform: translateY(0); opacity: 1; }
+        @keyframes sparkle {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-80px) scale(1.5); opacity: 0.8; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Chào mừng đến với trang kỷ niệm của lớp 12D1!</h1>
-        <p>Hãy cùng nhau lưu giữ những khoảnh khắc đẹp của lớp 12D1!</p>
-    </header>
+    <canvas id="backgroundCanvas"></canvas>
 
-    <section id="home">
-        <h2>Trang chủ</h2>
-        <p>Lớp 12D1 Niên Khóa 2022-2025.</p>
-        <a href="index.html" class="btn">Trang Chủ</a>
-    </section>
+    <div class="container">
+        <header>
+            <h1>Chào Mừng Đến Với Kỷ Niệm Lớp 12D1!</h1>
+            <p>Hãy cùng nhau lưu giữ những khoảnh khắc lung linh của lớp 12D1!</p>
+        </header>
 
-    <section id="activities">
-        <h2>Hoạt Động</h2>
-        <p>Đây là phần kỷ niệm và các hoạt động của lớp 12D1.</p>
-        <a href="hoatdong1.html" class="btn">Hoạt Động</a>
-    </section>
+        <section id="home">
+            <h2>Trang Chủ</h2>
+            <p>Lớp 12D1 Niên Khóa 2022-2025 - Nơi ký ức tỏa sáng.</p>
+            <a href="index.html" class="btn">Trang Chủ</a>
+        </section>
 
-    <section id="members">
-        <h2>Giới thiệu các thành viên lớp 12D1</h2>
-        <a href="thanhvien.html" class="btn">Thành Viên</a>
-    </section>
+        <section id="activities">
+            <h2>Hoạt Động</h2>
+            <p>Khám phá những kỷ niệm rực rỡ qua các hoạt động của lớp 12D1.</p>
+            <a href="hoatdong1.html" class="btn">Hoạt Động</a>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Lớp 12D1. Tất cả quyền được bảo lưu.</p>
-    </footer>
+        <section id="members">
+            <h2>Thành Viên</h2>
+            <p>Gặp gỡ những ngôi sao sáng đã làm nên 12D1.</p>
+            <a href="thanhvien.html" class="btn">Thành Viên</a>
+        </section>
 
+        <footer>
+            <p>© 2025 Lớp 12D1 - Vũ Trụ Lung Linh. Tất cả quyền được bảo lưu.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/examples/js/postprocessing/UnrealBloomPass.js"></script>
     <script>
-        function createBubble() {
-            const bubble = document.createElement("div");
-            bubble.classList.add("floating-bubble");
-            document.body.appendChild(bubble);
-            bubble.style.left = `${Math.random() * window.innerWidth}px`;
-            bubble.style.top = `${Math.random() * window.innerHeight}px`;
-            setTimeout(() => bubble.remove(), 6000);
+        // Background Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('backgroundCanvas'), 
+            alpha: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        camera.position.z = 80;
+
+        // Bloom Effect
+        const renderScene = new THREE.RenderPass(scene, camera);
+        const bloomPass = new THREE.UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight),
+            2, 0.6, 0.9
+        );
+        bloomPass.threshold = 0;
+        bloomPass.strength = 2.8;
+        bloomPass.radius = 1.2;
+        const composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        // Stars with Glow
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 10000;
+        const posArray = new Float32Array(starCount * 3);
+        const velocities = new Float32Array(starCount);
+        const colors = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount; i++) {
+            posArray[i * 3] = (Math.random() - 0.5) * 450;
+            posArray[i * 3 + 1] = (Math.random() - 0.5) * 450;
+            posArray[i * 3 + 2] = (Math.random() - 0.5) * 450;
+            velocities[i] = Math.random() * 0.08 + 0.06;
+            colors[i * 3] = Math.random();     // Red
+            colors[i * 3 + 1] = Math.random(); // Green
+            colors[i * 3 + 2] = 1;             // Blue
         }
-        setInterval(createBubble, 500);
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        const starMaterial = new THREE.PointsMaterial({ 
+            size: 0.5, 
+            vertexColors: true, 
+            transparent: true, 
+            blending: THREE.AdditiveBlending 
+        });
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Nebula Effect
+        const nebulaGeometry = new THREE.SphereGeometry(250, 64, 64);
+        const nebulaMaterial = new THREE.MeshBasicMaterial({
+            color: 0xff4757,
+            transparent: true,
+            opacity: 0.35,
+            blending: THREE.AdditiveBlending,
+            side: THREE.DoubleSide
+        });
+        const nebula = new THREE.Mesh(nebulaGeometry, nebulaMaterial);
+        scene.add(nebula);
+
+        // Galaxy Ring
+        const ringGeometry = new THREE.TorusGeometry(150, 1, 16, 100);
+        const ringMaterial = new THREE.MeshBasicMaterial({
+            color: 0x00ddeb,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+        const galaxyRing = new THREE.Mesh(ringGeometry, ringMaterial);
+        galaxyRing.rotation.x = Math.PI / 2;
+        scene.add(galaxyRing);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xff4757, 5, 250);
+        pointLight.position.set(0, 0, 70);
+        scene.add(pointLight);
+
+        // Floating Sparkles
+        function createSparkle() {
+            const sparkle = document.createElement("div");
+            sparkle.classList.add("floating-sparkle");
+            document.body.appendChild(sparkle);
+            sparkle.style.left = `${Math.random() * window.innerWidth}px`;
+            sparkle.style.top = `${Math.random() * window.innerHeight}px`;
+            setTimeout(() => sparkle.remove(), 5000);
+        }
+        setInterval(createSparkle, 200);
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            // Update Stars
+            const starPos = stars.geometry.attributes.position.array;
+            for (let i = 0; i < starCount; i++) {
+                starPos[i * 3 + 2] += velocities[i];
+                if (starPos[i * 3 + 2] > 225) starPos[i * 3 + 2] = -225;
+            }
+            stars.geometry.attributes.position.needsUpdate = true;
+
+            // Update Nebula and Galaxy Ring
+            nebula.rotation.y += 0.006;
+            nebula.rotation.x += 0.003;
+            galaxyRing.rotation.z += 0.005;
+
+            composer.render();
+        }
+        animate();
+
+        // Resize Handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Background Music
+        const bgMusic = new Audio('https://www.bensound.com/bensound-music/bensound-the-lounge.mp3');
+        bgMusic.loop = true;
+        bgMusic.volume = 0.6;
+        bgMusic.play();
     </script>
 </body>
 </html>
-

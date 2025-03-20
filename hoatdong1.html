@@ -1,122 +1,36 @@
-<!DOCTYPE html>
+
+<<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sổ lưu niệm</title>
+    <title>Sổ Lưu Niệm 12D1 </title>
     <style>
-        @keyframes shimmer {
-            0% { background-position: -200px 0; }
-            100% { background-position: 200px 0; }
-        }
-
-        /* Hiệu ứng Gradient Di Chuyển */
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        /* Hiệu ứng lật trang mượt mà */
-.page {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transform-origin: left;
-    transition: transform 0.8s ease-in-out, opacity 0.5s ease; /* Giảm thời gian và dùng easing cho lật mượt mà */
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Hiệu ứng khi lật trang */
-.page.flipped {
-    transform: rotateY(-180deg) rotateX(5deg); /* Chỉnh sửa góc lật nhẹ nhàng hơn */
-    transition: transform 0.8s ease-in-out; /* Mượt mà hơn khi lật */
-}
-
-/* Hiệu ứng mượt mà khi cuộn trang */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Hiệu ứng viền sáng khi hover */
-.page:hover {
-    border: 3px solid #ff4757;
-    transition: border 0.3s ease;
-}
-
-/* Hiệu ứng khi hover trên nút */
-.home-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background: #ff4757;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.home-button:hover {
-    background: #e84118;
-    transform: scale(1.05);
-}
-
-.home-button:active {
-    transform: scale(1.02);
-}
-
-
-        .cover {
-            background: linear-gradient(to right, #ff7e5f, #feb47b); 
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            border-radius: 10px;
-            border: 5px solid;
-            border-image-source: linear-gradient(90deg, #ffd700, #fff, #ffd700);
-            border-image-slice: 1;
-            animation: shimmer 2s infinite linear;
-            background-size: 400px;
-        }
-
-        /* Hiệu ứng parallax */
         body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1a1a3d, #0d0d1a);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f5f5f5;
-            margin: 0;
             perspective: 2000px;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .book {
             position: relative;
-            width: 350px;
-            height: 450px;
+            width: 400px;
+            height: 500px;
             transform-style: preserve-3d;
-            border-radius: 15px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, #6a11cb, #2575fc);
             transition: transform 0.5s ease-in-out;
-            background-size: 200% 200%;
-            animation: gradientMove 5s ease infinite;
+            z-index: 10;
         }
 
         .book:hover {
-            transform: rotate(5deg) scale(1.02);
+            transform: rotateY(10deg) scale(1.05);
         }
 
         .page {
@@ -125,26 +39,34 @@ html {
             height: 100%;
             transform-style: preserve-3d;
             transform-origin: left;
-            transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s ease;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #fff, #f0f0f0);
         }
 
         .page .front, .page .back {
             position: absolute;
             width: 100%;
             height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            backface-visibility: hidden;
         }
 
-        .front img, .back img {
-            width: 90%;
-            height: 90%;
-            border-radius: 5px;
+        .page .front img, .page .back img {
+            width: 95%;
+            height: 95%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .page .front:hover img, .page .back:hover img {
+            transform: scale(1.05);
         }
 
         .back {
@@ -152,7 +74,49 @@ html {
         }
 
         .flipped {
-            transform: rotateY(-180deg) rotateX(10deg);
+            transform: rotateY(-180deg);
+        }
+
+        .cover {
+            background: linear-gradient(45deg, #ff4757, #00ddeb);
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 5px solid;
+            border-image: linear-gradient(45deg, #ffd700, #fff, #ffd700) 1;
+            animation: gradientMove 5s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .home-button {
+            position: fixed;
+            bottom: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(45deg, #ff4757, #00ddeb);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+        }
+
+        .home-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.6);
         }
 
         .page:nth-child(1) { z-index: 10; }
@@ -160,65 +124,16 @@ html {
         .page:nth-child(3) { z-index: 8; }
         .page:nth-child(4) { z-index: 7; }
         .page:nth-child(5) { z-index: 6; }
-        .page:nth-child(6) { z-index: 5; }
-        .page:nth-child(7) { z-index: 4; }
-        .page:nth-child(8) { z-index: 3; }
-        .page:nth-child(9) { z-index: 2; }
-        .page:nth-child(10) { z-index: 1; }
-
-        /* Hiệu ứng mượt mà khi cuộn trang */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Hiệu ứng viền sáng khi hover */
-        .page:hover {
-            border: 3px solid #ff4757;
-            transition: border 0.3s ease;
-        }
-
-        /* Hiệu ứng lật trang từ từ */
-        .page.flipped {
-            transition: transform 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .page {
-            transition: transform 1s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        /* Nút Quay lại trang chủ */
-        .home-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background: #ff4757;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .home-button:hover {
-            background: #e84118;
-            transform: scale(1.1);
-        }
-
-        .home-button:active {
-            transform: scale(1.05);
-        }
-
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <canvas id="backgroundCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
     <div class="book">
         <div class="page">
-            <div class="front cover">📖 Lưu niệm 12D1</div>
+            <div class="front cover">📖 Lưu Niệm 12D1</div>
             <div class="back"><img src="images/camhoa.jpg" alt="Page 1"></div>
         </div>
-        
         <div class="page">
             <div class="front"><img src="images/anhlop.jpg" alt="Page 2"></div>
             <div class="back"><img src="images/hdcamhoa.jpg" alt="Page 3"></div>
@@ -233,34 +148,346 @@ html {
         </div>
         <div class="page">
             <div class="front"><img src="images/vetranh.jpg" alt="Page 8"></div>
+            <div class="back"></div>
         </div>
     </div>
-    
-    <!-- Nút Quay về trang chủ -->
     <button class="home-button" onclick="goHome()">Quay về trang chủ</button>
-    
-    <script>
-        function goHome() {
-            window.location.href = 'index.html';  // Điều hướng về trang chủ
-        }
 
-        let pages = document.querySelectorAll('.page');
-        let maxPages = pages.length;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+        // Background Scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('backgroundCanvas'), 
+            alpha: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        camera.position.z = 50;
+
+        // Stars
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 2000;
+        const posArray = new Float32Array(starCount * 3);
+        const velocities = new Float32Array(starCount);
+        for (let i = 0; i < starCount * 3; i += 3) {
+            posArray[i] = (Math.random() - 0.5) * 200;
+            posArray[i + 1] = (Math.random() - 0.5) * 200;
+            posArray[i + 2] = (Math.random() - 0.5) * 200;
+            velocities[i / 3] = Math.random() * 0.02 + 0.01;
+        }
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const starMaterial = new THREE.PointsMaterial({ 
+            color: 0xffffff, 
+            size: 0.2, 
+            transparent: true, 
+            blending: THREE.AdditiveBlending 
+        });
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Ambient Light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        // Page Flip Logic
+        const pages = document.querySelectorAll('.page');
         let currentPage = 0;
+        const maxPages = pages.length;
+        const flipSound = new Audio('https://www.soundjay.com/paper/paper-flip-1.mp3');
+        flipSound.volume = 0.5;
 
         document.body.addEventListener('click', (event) => {
-            let bookRect = document.querySelector('.book').getBoundingClientRect();
-            let clickX = event.clientX;
-            let middleX = bookRect.left + bookRect.width / 2;
-            
+            const bookRect = document.querySelector('.book').getBoundingClientRect();
+            const clickX = event.clientX;
+            const middleX = bookRect.left + bookRect.width / 2;
+
             if (clickX > middleX && currentPage < maxPages - 1) {
                 pages[currentPage].classList.add('flipped');
                 currentPage++;
+                flipSound.play();
+                createParticleEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
+                createFireworkEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
             } else if (clickX < middleX && currentPage > 0) {
                 currentPage--;
                 pages[currentPage].classList.remove('flipped');
+                flipSound.play();
+                createParticleEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
+                createFireworkEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
             }
         });
+
+        // Touch Support
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+        document.addEventListener('touchend', (e) => {
+            const bookRect = document.querySelector('.book').getBoundingClientRect();
+            const touchEndX = e.changedTouches[0].clientX;
+            const middleX = bookRect.left + bookRect.width / 2;
+
+            if (touchEndX > touchStartX + 50 && currentPage < maxPages - 1) {
+                pages[currentPage].classList.add('flipped');
+                currentPage++;
+                flipSound.play();
+                createParticleEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
+                createFireworkEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
+            } else if (touchEndX < touchStartX - 50 && currentPage > 0) {
+                currentPage--;
+                pages[currentPage].classList.remove('flipped');
+                flipSound.play();
+                createParticleEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
+                createFireworkEffect(bookRect.left + bookRect.width / 2, bookRect.top + bookRect.height / 2);
+            }
+        });
+
+        // Original Particle Effect
+        function createParticleEffect(x, y) {
+            const particleGroups = 3;
+            for (let group = 0; group < particleGroups; group++) {
+                const particleGeometry = new THREE.BufferGeometry();
+                const particleCount = 80;
+                const posArray = new Float32Array(particleCount * 3);
+                const velocities = new Float32Array(particleCount * 3);
+                const colors = new Float32Array(particleCount * 3);
+                const sizes = new Float32Array(particleCount);
+
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    posArray[i] = (x - window.innerWidth / 2) / 10;
+                    posArray[i + 1] = (y - window.innerHeight / 2) / 10;
+                    posArray[i + 2] = Math.random() * 5;
+
+                    velocities[i] = (Math.random() - 0.5) * (0.5 + group * 0.2);
+                    velocities[i + 1] = (Math.random() - 0.5) * (0.5 + group * 0.2);
+                    velocities[i + 2] = (Math.random() - 0.5) * (0.5 + group * 0.2);
+
+                    colors[i] = 1.0 - (group * 0.3);
+                    colors[i + 1] = 0.3 + (group * 0.2);
+                    colors[i + 2] = 0.5 + (group * 0.2);
+
+                    sizes[i / 3] = Math.random() * (0.3 + group * 0.2);
+                }
+
+                particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                particleGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+                const particleMaterial = new THREE.PointsMaterial({
+                    vertexColors: true,
+                    size: 0.5,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false,
+                    opacity: 0.8
+                });
+
+                const particles = new THREE.Points(particleGeometry, particleMaterial);
+                particles.userData = { 
+                    velocities, 
+                    life: 2.0 + group * 0.5,
+                    initialLife: 2.0 + group * 0.5
+                };
+                scene.add(particles);
+            }
+
+            createGlowEffect(x, y);
+        }
+
+        // Glow Effect
+        function createGlowEffect(x, y) {
+            const glowGeometry = new THREE.BufferGeometry();
+            const glowCount = 20;
+            const posArray = new Float32Array(glowCount * 3);
+            const velocities = new Float32Array(glowCount * 3);
+
+            for (let i = 0; i < glowCount * 3; i += 3) {
+                posArray[i] = (x - window.innerWidth / 2) / 10;
+                posArray[i + 1] = (y - window.innerHeight / 2) / 10;
+                posArray[i + 2] = 0;
+                
+                velocities[i] = (Math.random() - 0.5) * 0.3;
+                velocities[i + 1] = (Math.random() - 0.5) * 0.3;
+                velocities[i + 2] = (Math.random() - 0.5) * 0.3;
+            }
+
+            glowGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const glowMaterial = new THREE.PointsMaterial({
+                color: 0xffd700,
+                size: 1.5,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                opacity: 0.6
+            });
+
+            const glow = new THREE.Points(glowGeometry, glowMaterial);
+            glow.userData = { velocities, life: 1.0, initialLife: 1.0 };
+            scene.add(glow);
+        }
+
+        // Firework Effect
+        function createFireworkEffect(x, y) {
+            const fireworkCount = 3; // Số pháo hoa bắn lên
+            for (let f = 0; f < fireworkCount; f++) {
+                const fireworkGeometry = new THREE.BufferGeometry();
+                const particleCount = 100;
+                const posArray = new Float32Array(particleCount * 3);
+                const velocities = new Float32Array(particleCount * 3);
+                const colors = new Float32Array(particleCount * 3);
+                const sizes = new Float32Array(particleCount);
+                const explosionTime = Math.random() * 0.5 + 0.5; // Thời gian nổ ngẫu nhiên
+
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    posArray[i] = (x - window.innerWidth / 2) / 10;
+                    posArray[i + 1] = (y - window.innerHeight / 2) / 10;
+                    posArray[i + 2] = 0;
+
+                    // Vận tốc ban đầu bắn lên
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 1.5 + 1.0;
+                    velocities[i] = Math.cos(angle) * speed * 0.2; // Chậm lại để thấy đường bắn
+                    velocities[i + 1] = Math.sin(angle) * speed + 2.0; // Bắn lên cao hơn
+                    velocities[i + 2] = (Math.random() - 0.5) * 0.5;
+
+                    // Màu sắc ngẫu nhiên cho pháo hoa
+                    colors[i] = Math.random();
+                    colors[i + 1] = Math.random();
+                    colors[i + 2] = Math.random();
+
+                    sizes[i / 3] = Math.random() * 0.5 + 0.5;
+                }
+
+                fireworkGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                fireworkGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                fireworkGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+                const fireworkMaterial = new THREE.PointsMaterial({
+                    vertexColors: true,
+                    size: 0.6,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false,
+                    opacity: 1.0
+                });
+
+                const firework = new THREE.Points(fireworkGeometry, fireworkMaterial);
+                firework.userData = { 
+                    velocities, 
+                    life: 3.0,
+                    initialLife: 3.0,
+                    explosionTime,
+                    hasExploded: false
+                };
+                scene.add(firework);
+            }
+        }
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const delta = clock.getDelta();
+
+            // Update Stars
+            const starPos = stars.geometry.attributes.position.array;
+            for (let i = 0; i < starCount; i++) {
+                starPos[i * 3 + 2] += velocities[i];
+                if (starPos[i * 3 + 2] > 100) starPos[i * 3 + 2] = -100;
+            }
+            stars.geometry.attributes.position.needsUpdate = true;
+
+            // Update Particles, Glow, and Fireworks
+            scene.children.forEach(child => {
+                if (child instanceof THREE.Points && child.userData.life) {
+                    child.userData.life -= delta;
+                    if (child.userData.life <= 0) {
+                        scene.remove(child);
+                        return;
+                    }
+
+                    const pos = child.geometry.attributes.position.array;
+                    const vel = child.userData.velocities;
+
+                    if (child.userData.explosionTime) { // Firework logic
+                        const timeElapsed = child.userData.initialLife - child.userData.life;
+                        if (timeElapsed < child.userData.explosionTime) {
+                            // Giai đoạn bắn lên
+                            for (let i = 0; i < pos.length / 3; i++) {
+                                pos[i * 3] += vel[i * 3];
+                                pos[i * 3 + 1] += vel[i * 3 + 1];
+                                pos[i * 3 + 2] += vel[i * 3 + 2];
+                                vel[i * 3 + 1] -= 0.05; // Trọng lực
+                            }
+                        } else if (!child.userData.hasExploded) {
+                            // Giai đoạn nổ
+                            child.userData.hasExploded = true;
+                            for (let i = 0; i < pos.length / 3; i++) {
+                                const angle = Math.random() * Math.PI * 2;
+                                const speed = Math.random() * 1.5 + 1.0;
+                                vel[i * 3] = Math.cos(angle) * speed;
+                                vel[i * 3 + 1] = Math.sin(angle) * speed;
+                                vel[i * 3 + 2] = (Math.random() - 0.5) * speed;
+                            }
+                        } else {
+                            // Giai đoạn sau nổ
+                            for (let i = 0; i < pos.length / 3; i++) {
+                                pos[i * 3] += vel[i * 3];
+                                pos[i * 3 + 1] += vel[i * 3 + 1];
+                                pos[i * 3 + 2] += vel[i * 3 + 2];
+                                vel[i * 3 + 1] -= 0.03; // Trọng lực sau nổ
+                                vel[i * 3] *= 0.98;
+                                vel[i * 3 + 1] *= 0.98;
+                                vel[i * 3 + 2] *= 0.98;
+                            }
+                        }
+                    } else {
+                        // Regular particles and glow
+                        for (let i = 0; i < pos.length / 3; i++) {
+                            pos[i * 3] += vel[i * 3];
+                            pos[i * 3 + 1] += vel[i * 3 + 1];
+                            pos[i * 3 + 2] += vel[i * 3 + 2];
+                            vel[i * 3] *= 0.98;
+                            vel[i * 3 + 1] *= 0.98;
+                            vel[i * 3 + 2] *= 0.98;
+                        }
+                    }
+
+                    child.geometry.attributes.position.needsUpdate = true;
+                    child.material.opacity = (child.userData.life / child.userData.initialLife) * 0.8;
+
+                    if (child.geometry.attributes.size) {
+                        const sizes = child.geometry.attributes.size.array;
+                        for (let i = 0; i < sizes.length; i++) {
+                            sizes[i] = Math.sin(Date.now() * 0.005 + i) * 0.2 + 0.3;
+                        }
+                        child.geometry.attributes.size.needsUpdate = true;
+                    }
+                }
+            });
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Home Button
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Resize Handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Background Music
+        const bgMusic = new Audio('https://www.bensound.com/bensound-music/bensound-the-lounge.mp3');
+        bgMusic.loop = true;
+        bgMusic.volume = 0.2;
+        bgMusic.play();
     </script>
 </body>
 </html>
